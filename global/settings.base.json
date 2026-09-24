@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "model": "opus[1m]",
+  "alwaysThinkingEnabled": true,
+  "tui": "fullscreen",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "voiceEnabled": true,
+  "agentPushNotifEnabled": true,
+  "permissions": {
+    "defaultMode": "auto",
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:flowexec.io)",
+      "Read(//tmp/**)",
+      "Bash(go mod:*)",
+      "Bash(go get:*)",
+      "Bash(cargo fmt:*)",
+      "Bash(cargo clippy:*)",
+      "Bash(npx eslint:*)",
+      "Bash(gh search:*)",
+      "Bash(flow template:*)",
+      "Bash(flow workspace:*)",
+      "Bash(flow browse:*)",
+      "Bash(flow schema validate:*)",
+      "mcp__flow__get_info",
+      "mcp__flow__list_workspaces",
+      "mcp__flow__get_workspace",
+      "mcp__flow__get_workspace_config",
+      "mcp__flow__list_executables",
+      "mcp__flow__get_executable",
+      "mcp__flow__get_execution_logs",
+      "mcp__flow__sync_executables",
+      "mcp__flow__execute"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh release:*)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git push --force-with-lease:*)",
+      "Bash(env)",
+      "Bash(printenv:*)",
+      "Bash(flow secret get:*)",
+      "Read(**/.env)",
+      "Read(**/.env.local)"
+    ]
+  },
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true
+  }
+}

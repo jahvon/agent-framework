@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://flowexec.io/schemas/flowfile_schema.json
+namespace: agent
+tags: [agent, global]
+description: Machine-level Claude Code setup — CLAUDE.md, settings, and plugins.
+executables:
+  - verb: install
+    name: global
+    description: Link CLAUDE.md, build settings.json from base + per-machine overlay, and install the core and flow plugins
+    exec:
+      dir: //
+      args:
+        - flag: force
+          envKey: FORCE
+          type: bool
+          default: "false"
+      cmd: ./scripts/global.sh install
+
+  - verb: update
+    name: global
+    description: Pull this repo, then reapply CLAUDE.md, settings, and plugin updates
+    exec:
+      dir: //
+      args:
+        - flag: force
+          envKey: FORCE
+          type: bool
+          default: "false"
+      cmd: ./scripts/global.sh update
+
+  - verb: check
+    name: global
+    description: Report drift between this repo and the live ~/.claude setup
+    exec:
+      dir: //
+      cmd: ./scripts/global.sh check

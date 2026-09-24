@@ -3,7 +3,7 @@
   "description": "General workflow skills: opening and reviewing PRs, planning, tickets, validation, docs and decisions, and project setup.",
   "author": {
     "name": "Jahvon Dockery",
-    "email": "jahvondockery@gmail.com"
+    "email": "email@jahvon.dev"
   },
   "repository": "https://github.com/jahvon/agent-framework"
 }

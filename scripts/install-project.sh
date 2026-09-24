@@ -4,7 +4,7 @@
 # AGENTS.md gets marker-delimited managed sections, and other files are added only when absent.
 #
 # Env (all optional; detected when unset):
-#   TRACKER=linear|github|none  PREFIX=KLI  VALIDATE="flow validate"  DECISIONS_DIR=docs/decisions
+#   TRACKER=linear|github|none  PREFIX=ENG  VALIDATE="flow validate"  DECISIONS_DIR=docs/decisions
 #   FLOW=true|false (default: true when flow.yaml exists; true without one creates it)
 #   PRETTIER=true|false  PLUGINS=true|false  MARKETPLACE_SOURCE=jahvon/agent-framework
 #   DRY_RUN=true — report what would change and exit 1 if anything would.

@@ -34,7 +34,7 @@ Runs on top of whatever the repo already has, so you can review the `git diff` a
   `core` (and for flow workspaces `flow`) plugins for the whole team.
 - PR template and decision-record scaffolding — added only when absent.
 
-Options go after `--`: `--tracker=linear|github|none`, `--prefix=KLI`, `--validate="…"`,
+Options go after `--`: `--tracker=linear|github|none`, `--prefix=ENG`, `--validate="…"`,
 `--decisions-dir=…`, `--flow=true`, `--prettier=true`, `--plugins=false`.
 `flow check agent-framework/agent:project` previews the changes. Project installs reference the
 marketplace on GitHub (`jahvon/agent-framework`), so the repo must be pushed for teammates.

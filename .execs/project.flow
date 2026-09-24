@@ -4,7 +4,7 @@ visibility: public
 tags: [agent, project]
 description: |
   Project-level agent setup. Run from the target repo:
-  `flow install agent-framework/agent:project [-- --tracker=linear --prefix=KLI]`
+  `flow install agent-framework/agent:project [-- --tracker=linear --prefix=ENG]`
 executables:
   - verb: install
     name: project

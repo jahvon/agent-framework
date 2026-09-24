@@ -3,7 +3,7 @@
   "description": "Run, discover, and author flow executables in flow workspaces instead of hand-rolling shell commands.",
   "author": {
     "name": "Jahvon Dockery",
-    "email": "jahvondockery@gmail.com"
+    "email": "email@jahvon.dev"
   },
   "repository": "https://github.com/jahvon/agent-framework"
 }

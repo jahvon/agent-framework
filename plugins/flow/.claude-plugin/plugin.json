@@ -1,6 +1,5 @@
 {
   "name": "flow",
-  "version": "0.1.0",
   "description": "Run, discover, and author flow executables in flow workspaces instead of hand-rolling shell commands.",
   "author": {
     "name": "Jahvon Dockery",

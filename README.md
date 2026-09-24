@@ -25,9 +25,19 @@ From the project's root:
 flow install agent-framework/agent:project
 ```
 
-Copies `AGENTS.md`, `CLAUDE.md`, `.claude/settings.json`, a PR template, and decision-record
-scaffolding into the repo, skipping anything that already exists, then enables the plugins at
-project scope so teammates get them too. See `.execs/project.flow` for the params.
+Runs on top of whatever the repo already has, so you can review the `git diff` and tweak:
+
+- `AGENTS.md` — adds a **Project facts** block (added once, never rewritten; the skills read it)
+  and managed working-agreement sections (refreshed on each run) between marker comments.
+- `CLAUDE.md` — gets an `@AGENTS.md` import.
+- `.claude/settings.json`, `.mcp.json` — deep-merged; the repo's own values win. Enables the
+  `core` (and for flow workspaces `flow`) plugins for the whole team.
+- PR template and decision-record scaffolding — added only when absent.
+
+Options go after `--`: `--tracker=linear|github|none`, `--prefix=KLI`, `--validate="…"`,
+`--decisions-dir=…`, `--flow=true`, `--prettier=true`, `--plugins=false`.
+`flow check agent-framework/agent:project` previews the changes. Project installs reference the
+marketplace on GitHub (`jahvon/agent-framework`), so the repo must be pushed for teammates.
 
 ## For agents in other repos
 
@@ -35,7 +45,7 @@ If you were asked to install this setup into the repo you're working in:
 
 1. If the `core:setup-project` skill is available, follow it.
 2. Otherwise confirm `flow workspace list` shows `agent-framework`, then from the repo root run
-   `flow install agent-framework/agent:project` with params that fit the repo (read its task runner,
-   ticket tracker, and existing docs first), then `flow check agent-framework/agent:project`.
+   `flow install agent-framework/agent:project -- <options>` with options that fit the repo (read
+   its task runner, ticket tracker, and existing docs first).
 3. Report what was created, what was skipped because it already existed, and what the user should
    fill in (the **Project facts** block in `AGENTS.md`).

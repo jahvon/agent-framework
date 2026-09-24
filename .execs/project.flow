@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://flowexec.io/schemas/flowfile_schema.json
+namespace: agent
+visibility: public
+tags: [agent, project]
+description: |
+  Project-level agent setup. Run from the target repo:
+  `flow install agent-framework/agent:project [-- --tracker=linear --prefix=KLI]`
+executables:
+  - verb: install
+    name: project
+    description: Merge AGENTS.md sections, CLAUDE.md, .claude/settings.json, .mcp.json, a PR template, and decision-record scaffolding into the current repo
+    exec:
+      dir: ./
+      args: &args
+        - flag: tracker
+          envKey: TRACKER
+          default: none
+        - flag: prefix
+          envKey: PREFIX
+          default: ""
+        - flag: validate
+          envKey: VALIDATE
+          default: ""
+        - flag: decisions-dir
+          envKey: DECISIONS_DIR
+          default: ""
+        - flag: flow
+          envKey: FLOW
+          default: ""
+        - flag: prettier
+          envKey: PRETTIER
+          default: "false"
+        - flag: plugins
+          envKey: PLUGINS
+          default: "true"
+      cmd: '"$FLOW_DEFINITION_DIR/../scripts/install-project.sh"'
+
+  - verb: check
+    name: project
+    description: Report what install agent:project would change in the current repo, without changing anything
+    exec:
+      dir: ./
+      args: *args
+      params:
+        - envKey: DRY_RUN
+          text: "true"
+      cmd: '"$FLOW_DEFINITION_DIR/../scripts/install-project.sh"'

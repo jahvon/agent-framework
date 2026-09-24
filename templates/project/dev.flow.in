@@ -1,0 +1,4 @@
+# yaml-language-server: $schema=https://flowexec.io/schemas/flowfile_schema.json
+tags: [dev]
+description: Development tasks. Add executables here as automation is needed.
+{{IMPORTS}}executables: []

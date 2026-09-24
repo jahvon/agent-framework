@@ -1,0 +1,10 @@
+{
+  "name": "core",
+  "version": "0.1.0",
+  "description": "General workflow skills: opening and reviewing PRs, planning, tickets, validation, docs and decisions, and project setup.",
+  "author": {
+    "name": "Jahvon Dockery",
+    "email": "jahvondockery@gmail.com"
+  },
+  "repository": "https://github.com/jahvon/agent-framework"
+}

@@ -12,6 +12,11 @@
       "name": "flow",
       "description": "Run, discover, and author flow executables in flow workspaces instead of hand-rolling shell commands.",
       "source": "./plugins/flow"
+    },
+    {
+      "name": "core",
+      "description": "General workflow skills: opening and reviewing PRs, planning, tickets, validation, docs and decisions, and project setup.",
+      "source": "./plugins/core"
     }
   ]
 }

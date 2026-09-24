@@ -1,0 +1,17 @@
+{
+  "name": "jahvon",
+  "owner": {
+    "name": "Jahvon Dockery",
+    "email": "jahvondockery@gmail.com"
+  },
+  "metadata": {
+    "description": "Jahvon's personal coding-agent skills: PR workflow, review, planning, docs and decisions, and flow automation."
+  },
+  "plugins": [
+    {
+      "name": "flow",
+      "description": "Run, discover, and author flow executables in flow workspaces instead of hand-rolling shell commands.",
+      "source": "./plugins/flow"
+    }
+  ]
+}

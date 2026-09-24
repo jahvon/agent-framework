@@ -141,7 +141,12 @@ case "${1:-}" in
     echo "→ plugins"; ensure_plugins
     ;;
   update)
-    echo "→ pull"; git -C "$REPO" pull --ff-only
+    echo "→ pull"
+    if git -C "$REPO" rev-parse --abbrev-ref '@{upstream}' >/dev/null 2>&1; then
+      git -C "$REPO" pull --ff-only
+    else
+      echo "  no upstream configured; using the local checkout"
+    fi
     echo "→ CLAUDE.md"; link_claude_md
     echo "→ settings"; write_settings
     echo "→ plugins"; ensure_plugins

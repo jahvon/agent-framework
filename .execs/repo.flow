@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://flowexec.io/schemas/flowfile_schema.json
+tags: [repo]
+description: Development tasks for the agent-framework repo itself.
+executables:
+  - verb: validate
+    description: Validate flowfiles, JSON, skill frontmatter, and the plugin marketplace
+    exec:
+      dir: //
+      cmd: ./scripts/validate.sh
+
+  - verb: setup
+    description: Register this repo as the agent-framework flow workspace
+    exec:
+      dir: //
+      cmd: |
+        flow workspace add agent-framework "$(pwd)"
+        flow sync

@@ -1,0 +1,4 @@
+# yaml-language-server: $schema=https://flowexec.io/schemas/workspace_schema.json
+displayName: Agent Framework
+descriptionFile: README.md
+tags: [personal, agents, claude]

@@ -23,7 +23,8 @@ to pick up framework updates.
 `scripts/install-project.sh`, run by `install agent:project`. Per file type:
 JSON is deep-merged (existing values win, permission arrays are unioned); `AGENTS.md` gets
 marker-delimited managed sections that re-runs refresh, plus a Project facts block that is only
-ever inserted; `CLAUDE.md` gets an `@AGENTS.md` import if missing; everything else is added only
+ever inserted and is read back on re-runs as the source of truth for the validate command and
+decision-record location; `CLAUDE.md` gets an `@AGENTS.md` import if missing; everything else is added only
 when absent.
 
 ## Consequences

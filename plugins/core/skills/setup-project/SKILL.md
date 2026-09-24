@@ -34,4 +34,6 @@ The user reviews the result with `git diff` and tweaks it.
    eye; and any contradictions found. Don't commit unless the user asks.
 
 Re-running later refreshes the managed `AGENTS.md` sections and merges new settings. It never
-rewrites the Project facts block or files it only adds when absent.
+rewrites the Project facts block or files it only adds when absent, and it reads the validate
+command and decision-record location back from Project facts, so fixing them there sticks. Point
+**Decision records** at a single file to keep a one-file decision log without scaffolding.

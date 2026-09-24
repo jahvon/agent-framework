@@ -57,8 +57,19 @@ detect_decisions_dir() {
   echo "docs/decisions"
 }
 
-if [ -n "${VALIDATE:-}" ]; then VALIDATE_LINE="\`$VALIDATE\`"; else VALIDATE_LINE="$(detect_validate)"; fi
+# A Project facts block the user already edited is the source of truth on re-runs.
+fact() {
+  [ -f AGENTS.md ] || return 0
+  sed -n '/agent-framework:begin project-facts/,/agent-framework:end project-facts/p' AGENTS.md \
+    | grep -m1 "^- \*\*$1:\*\*" | grep -oE '`[^`]+`' | head -1 | tr -d '`' || true
+}
+
+if [ -n "${VALIDATE:-}" ]; then VALIDATE_LINE="\`$VALIDATE\`"
+elif [ -n "$(fact Validate)" ]; then VALIDATE_LINE="\`$(fact Validate)\`"
+else VALIDATE_LINE="$(detect_validate)"; fi
+DECISIONS_DIR="${DECISIONS_DIR:-$(fact 'Decision records')}"
 DECISIONS_DIR="${DECISIONS_DIR:-$(detect_decisions_dir)}"
+DECISIONS_DIR="${DECISIONS_DIR%/}"
 ID="${PREFIX:+$PREFIX-}123"
 case "$TRACKER" in
   linear) TRACKER_LINE="Linear${PREFIX:+, IDs \`$PREFIX-123\`}"; FOOTER="Refs $ID";;
@@ -184,8 +195,7 @@ jq -n \
     }
   }
   + (if $flow then {
-      env: { FLOW_RUN_CLIENT: "claude-code", FLOW_RUN_SESSION: "${CLAUDE_CODE_SESSION_ID}" },
-      enabledMcpjsonServers: ["flow"]
+      env: { FLOW_RUN_CLIENT: "claude-code", FLOW_RUN_SESSION: "${CLAUDE_CODE_SESSION_ID}" }
     } else {} end)
   + (if $plugins then {
       extraKnownMarketplaces: { jahvon: { source: { source: "github", repo: $src } } },
@@ -208,8 +218,12 @@ render "$TPL/github/pull_request_template.md" "${FOOTER:+
 <!-- Ticket footer: \`Refs <ID>\` / \`Fixes <ID>\`, or \`No ticket\` for small self-contained work. -->
 $FOOTER}" "" > "$TMP/pr.md"
 add_if_absent .github/pull_request_template.md "$TMP/pr.md"
-add_if_absent "$DECISIONS_DIR/README.md" "$TPL/decisions/README.md"
-add_if_absent "$DECISIONS_DIR/template.md" "$TPL/decisions/template.md"
+if [ -f "$DECISIONS_DIR" ]; then
+  note "kept" "$DECISIONS_DIR (single-file decision log)"
+else
+  add_if_absent "$DECISIONS_DIR/README.md" "$TPL/decisions/README.md"
+  add_if_absent "$DECISIONS_DIR/template.md" "$TPL/decisions/template.md"
+fi
 
 # A flow workspace when asked for and missing.
 if [ "$FLOW" = "true" ] && [ ! -f flow.yaml ]; then

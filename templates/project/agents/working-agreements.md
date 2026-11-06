@@ -33,8 +33,8 @@ re-litigating.
 
 - Run the **Validate** command from Project facts before committing, and report its real result.
 - Commits: subject says what (imperative, ≤ ~50 chars), body says why, footer carries the ticket.
-- Write for the squash: PR titles and descriptions stand alone in `git log`; no references to
-  chat, review rounds, or the agent. Verification goes in a PR comment.
-- Skills: `core:open-pr`, `core:review-pr`, `core:brainstorm`, `core:create-ticket`,
-  `core:validate`, `core:docs-and-decisions`.
+- PRs open as drafts with the description format in `core:personal-dev-workflow`
+  (`references/pr-workflow.md`), verification included.
+- Skills: `core:personal-dev-workflow`, `core:open-pr`, `core:review-pr`, `core:brainstorm`,
+  `core:create-ticket`, `core:validate`, `core:docs-and-decisions`.
 <!-- agent-framework:end working-agreements -->

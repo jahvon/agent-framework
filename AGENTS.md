@@ -1,13 +1,17 @@
 # agent-framework
 
-Jahvon's personal coding-agent setup, installed onto machines and into projects through flow.
+Jahvon's personal coding-agent setup, installed onto Jahvon's machines and into Jahvon's projects through flow.
+Single user: optimize for Jahvon's workflow, not for teammates.
 
 ## Layout
 
 - `plugins/` — Claude Code plugins served by the `jahvon` marketplace (`.claude-plugin/marketplace.json`).
-  - `core` — general workflow skills (PRs, review, planning, tickets, validation, docs and decisions, project setup).
+  - `core` — workflow skills (PRs, review, planning, tickets, validation, docs and decisions, project setup).
+    `personal-dev-workflow` holds the persona, the numbered `RULES.md`, and the review-packet / PR /
+    quiet-hours references; other skills defer to it.
   - `flow` — skills for repos that use flow for task automation.
-- `global/` — machine-level config: `CLAUDE.md` (symlinked to `~/.claude/CLAUDE.md`) and `settings.base.json`.
+- `global/` — machine-level config: `CLAUDE.md` and `settings.base.json`. `install agent:global` symlinks
+  `CLAUDE.md`, plus `PERSONA.md` and `RULES.md` from `personal-dev-workflow`, into `~/.claude/`.
 - `templates/project/` — files installed into a project by `install agent:project`.
 - `scripts/` — shell behind the flow executables. Executables stay thin; logic lives here.
 - `.execs/` — flow executables. Namespace `agent` for installs, no namespace for this repo's own tasks.
@@ -23,6 +27,8 @@ Jahvon's personal coding-agent setup, installed onto machines and into projects 
 - `flowexec/flow` is a public OSS repo: nothing here may assume its `.claude/` setup changes, and nothing
   personal belongs in content meant to be upstreamed there.
 - Skill directory name must equal the skill's `name:`.
+- Change rules by appending to `RULES.md` with the next free ID in the category. Never renumber; strike
+  retired rules with a date.
 
 ## Tasks
 

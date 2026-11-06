@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: Socratic brainstorming and planning partner — clarify before solutioning, explore approaches with tradeoffs, shape a plan in PR-sized chunks, and capture it as tickets only when the work is big enough to need them. Use when the user wants to think through a feature, explore an idea, scope work, weigh approaches, or plan before writing code ("brainstorm", "let's plan", "help me think through", "how should I approach", "scope this out").
+description: Socratic brainstorming and planning partner — clarify before solutioning, explore approaches with tradeoffs, shape a plan in complete, shippable chunks, and capture it as tickets only when the work is big enough to need them. Use when the user wants to think through a feature, explore an idea, scope work, weigh approaches, or plan before writing code ("brainstorm", "let's plan", "help me think through", "how should I approach", "scope this out").
 ---
 
 # Brainstorm & Plan
@@ -15,8 +15,8 @@ Don't use this for small, well-understood changes — just do those.
 1. **No code and no edits while brainstorming.** Don't touch files until the user moves to
    building.
 2. **Clarify before solutioning.** Say assumptions out loud; never silently assume scope.
-3. **One focused question round at a time** — 2–4 sharp questions via `AskUserQuestion`, then
-   incorporate the answers before going deeper.
+3. **Batch questions** — all open questions in one numbered round, each with a recommended
+   default and a one-line reason (`R-PLAN-03`, `R-DX-02`), so "defaults" is a valid answer.
 4. **Ground it in the repo.** Read `AGENTS.md`, its Project facts, and any architecture docs or
    decision records it points to. Name the layers and packages involved and respect the
    dependency direction the repo documents.
@@ -37,14 +37,15 @@ Pin down with the first question round:
 
 ### 2. Explore the solution space
 
-Present 2–3 viable approaches. For each: a one-paragraph sketch, the layers/packages it
-touches, tradeoffs (complexity, blast radius, reversibility, cost), and the key risk. Then
+Present 2–3 viable approaches side by side: a Mermaid diagram each, then one comparison table
+(layers/packages touched, complexity, blast radius, reversibility, cost, key risk). Then
 recommend one. Flag when the choice warrants a decision record (`docs-and-decisions` skill).
 
 ### 3. Shape the plan
 
 A skimmable map, not a spec:
-- **Chunks**, each PR-sized (under ~500 lines), ordered by dependency direction
+- **Chunks**, each a complete, working piece of functionality and its own PR (`R-PR-03`), ordered by
+  dependency direction; note which can be built in parallel and where they integrate
 - **Packages and files** per chunk
 - **Test strategy** — what gets unit vs integration coverage
 - **Risks and open questions** still standing
@@ -56,7 +57,7 @@ If the plan collapsed into one PR's worth of work, skip tickets, say so, and han
 implementation.
 
 Otherwise offer to file tickets and **confirm before creating any** (`create-ticket` skill for
-format). Default shape: ~5–6 cohesive, PR-sized tickets grouped by what ships together — not a
+format). Default shape: ~5–6 cohesive tickets, each a complete piece of functionality, grouped by what ships together — not a
 granular step list — under a parent issue or project, with optional work marked so it can be
 deferred and "blocks"/"related" links so the set reads as a plan.
 

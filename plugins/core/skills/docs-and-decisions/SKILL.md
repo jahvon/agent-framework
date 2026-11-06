@@ -14,7 +14,7 @@ facts override them (**Docs**, **Decision records**).
 | How a subsystem works, runbooks, guides, reference | `docs/` (or next to the code as a package README) | On demand |
 | Why a significant choice was made, and what it rules out | `docs/decisions/NNNN-slug.md` | On demand |
 | Why *this change* was made; history; alternatives tried | Commit body and PR description | `git log` |
-| Verification, screenshots, review notes | PR comment | Once, in review |
+| Verification, screenshots, review notes | PR description (Verification section) | Once, in review |
 
 ## Rules for always-loaded files (`AGENTS.md`, `CLAUDE.md`, rules files)
 
@@ -60,7 +60,7 @@ Before calling the change done or opening a PR, walk this list against the diff:
   README, flow executable descriptions).
 - **Something an always-loaded file says is now false** → fix it now.
 
-If nothing needed updating, say "Docs: N/A — ⟨reason⟩" in the PR comment so a reviewer knows
+If nothing needed updating, say "Docs: N/A — ⟨reason⟩" in the PR description so a reviewer knows
 it was checked, not skipped.
 
 ## Writing style

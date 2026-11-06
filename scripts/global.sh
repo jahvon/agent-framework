@@ -14,6 +14,9 @@ BUILT="$STATE_DIR/settings.built.json"
 MARKETPLACE="jahvon"
 MARKETPLACE_SOURCE="${MARKETPLACE_SOURCE:-$REPO}"
 PLUGINS=(core flow)
+# Linked into $CLAUDE_DIR; global/CLAUDE.md @-imports the last two.
+PERSONAL_SKILL="plugins/core/skills/personal-dev-workflow"
+LINKS=("CLAUDE.md:global/CLAUDE.md" "PERSONA.md:$PERSONAL_SKILL/PERSONA.md" "RULES.md:$PERSONAL_SKILL/RULES.md")
 # Keys Claude Code writes on its own; never treated as drift.
 RUNTIME_KEYS='["feedbackSurveyState"]'
 
@@ -46,18 +49,23 @@ settings_drift() {
   diff <(strip_runtime "$BUILT" | jq -S .) <(strip_runtime "$LIVE" | jq -S .) || true
 }
 
-link_claude_md() {
-  local target="$REPO/global/CLAUDE.md" link="$CLAUDE_DIR/CLAUDE.md"
+link_file() {
+  local name="$1" target="$REPO/$2" link="$CLAUDE_DIR/$1"
   if [ -L "$link" ] && [ "$(readlink "$link")" = "$target" ]; then
-    echo "  CLAUDE.md already linked"
+    echo "  $name already linked"
     return
   fi
   if [ -e "$link" ] && ! cmp -s "$link" "$target"; then
     cp "$link" "$link.bak.$(stamp)"
-    echo "  backed up differing CLAUDE.md to $link.bak.*"
+    echo "  backed up differing $name to $link.bak.*"
   fi
   ln -sfn "$target" "$link"
   echo "  linked $link -> $target"
+}
+
+link_files() {
+  local entry
+  for entry in "${LINKS[@]}"; do link_file "${entry%%:*}" "${entry#*:}"; done
 }
 
 write_settings() {
@@ -104,12 +112,15 @@ ensure_plugins() {
 }
 
 check() {
-  local ok=0 target="$REPO/global/CLAUDE.md" link="$CLAUDE_DIR/CLAUDE.md"
-  if [ -L "$link" ] && [ "$(readlink "$link")" = "$target" ]; then
-    echo "✓ CLAUDE.md linked"
-  else
-    echo "✗ $link is not a symlink to $target"; ok=1
-  fi
+  local ok=0 entry name target link
+  for entry in "${LINKS[@]}"; do
+    name="${entry%%:*}" target="$REPO/${entry#*:}" link="$CLAUDE_DIR/${entry%%:*}"
+    if [ -L "$link" ] && [ "$(readlink "$link")" = "$target" ]; then
+      echo "✓ $name linked"
+    else
+      echo "✗ $link is not a symlink to $target"; ok=1
+    fi
+  done
   if [ ! -f "$BUILT" ]; then
     echo "✗ settings never built — run install agent:global"; ok=1
   else
@@ -136,7 +147,7 @@ check() {
 mkdir -p "$CLAUDE_DIR"
 case "${1:-}" in
   install)
-    echo "→ CLAUDE.md"; link_claude_md
+    echo "→ links"; link_files
     echo "→ settings"; write_settings
     echo "→ plugins"; ensure_plugins
     ;;
@@ -147,7 +158,7 @@ case "${1:-}" in
     else
       echo "  no upstream configured; using the local checkout"
     fi
-    echo "→ CLAUDE.md"; link_claude_md
+    echo "→ links"; link_files
     echo "→ settings"; write_settings
     echo "→ plugins"; ensure_plugins
     ;;

@@ -41,6 +41,10 @@ Never file as a silent side effect, and never file several without showing the l
    - GitHub → `gh issue create --title … --body-file … [--label …]`.
 4. Report the ID and URL.
 
+**Multi-PR features** are one parent issue holding the design in its description, with each
+complete phase as its own sub-issue and PR (Linear `parentId`), chained with `blockedBy`. Prefer ~5–6
+cohesive sub-issues over a granular step list.
+
 ### Bug
 ```markdown
 ## Problem

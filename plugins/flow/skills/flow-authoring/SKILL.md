@@ -19,6 +19,9 @@ a command for someone else, propose an executable for it.
   `validate` and `test unit` stay un-namespaced so they're short to type.
 - Logic longer than ~15 lines goes in `scripts/<name>.sh` and the executable calls it. The
   flowfile stays a readable index of what the repo can do.
+- If the repo has a Makefile, one-line commands go directly in the `.flow` file and multi-step
+  logic goes in a `make` target that flow calls, so `make` still works on a fresh clone or in CI
+  without flow. Never duplicate a command across both.
 - An existing `package.json` or `Makefile` can be imported with the flowfile's `imports:` key
   instead of re-declaring each script.
 

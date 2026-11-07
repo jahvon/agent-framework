@@ -45,25 +45,27 @@ gh pr create --base <branch-1> --title "..." --body "..."
 ```
 
 Each PR targets the previous branch as `--base`, stands alone for review, and states its
-position and merge order **in its description**. Rebase the stack and update bases when an earlier
+position and merge order **in its status comment**. Rebase the stack and update bases when an earlier
 PR changes.
 
 ## Step 3 — Write the description
 
 Fill the repo's `.github/pull_request_template.md` if it has one; otherwise use the template in
-`pr-workflow.md` (status line, Summary, Try it, Design, Verification, Risks). Never cite rule IDs (`R-…`) in
-the title, description, or commit messages; state the reason in plain words.
+`pr-workflow.md`. The description squash-merges as the commit body on main: Summary, Changes,
+and Design only. Status line, try-it commands, verification, and risks go in one status comment,
+edited in place. Never cite rule IDs (`R-…`) in the title, description, or commit messages; state
+the reason in plain words.
 
 - **Title** becomes the squashed commit subject: Conventional Commits, imperative, no trailing
   period, ticket ID in parentheses when there is one — `fix(parser): reject empty refs (ENG-12)`.
 - **Summary** — the *why*: the motivation and the constraint that shaped the approach. The diff
-  shows the mechanics. Link the answered review packet.
-- **Verification** — always state what you could **not** verify; silence reads as "covered".
-  Never say validation passed without having run it and seen it pass.
-- **Stacks** — state position and merge order in the description.
+  shows the mechanics.
+- **Verification** (status comment) — always state what you could **not** verify; silence reads
+  as "covered". Never say validation passed without having run it and seen it pass.
+- **Stacks** — state position and merge order in the status comment.
 
-Leave no placeholder HTML comments in the submitted body. Update the description in place as
-things change rather than adding comments.
+Leave no placeholder HTML comments in the submitted body. Update the description and the status
+comment in place as things change rather than adding comments.
 
 ## Pre-flight
 

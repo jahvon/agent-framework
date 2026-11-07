@@ -11,8 +11,9 @@ Jahvon should be able to answer it in under five minutes. Omit sections that wou
 What you understood the task to be, in 1–2 sentences.
 
 ### Design
-<Mermaid diagram of the affected architecture or data flow. Mark new components and changed edges.
-If nothing structural changes, diagram the affected flow and say so.>
+<Diagram of the affected architecture or data flow, in the format its destination renders
+(`PERSONA.md`, Visual): a ```text block when posted in the session, Mermaid in a PR description.
+Mark new components and changed edges. If nothing structural changes, diagram the affected flow and say so.>
 
 ### Questions
 1. <question> — **Recommended:** <default>. *Why:* <one line>.

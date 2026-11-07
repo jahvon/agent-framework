@@ -190,8 +190,10 @@ jq -n \
             "mcp__flow__sync_executables", "mcp__flow__execute"
           ] else [] end)
       ),
-      ask: ["Bash(git push:*)", "Bash(gh pr create:*)"],
-      deny: ["Bash(git push --force:*)", "Bash(git push -f:*)", "Read(**/.env)", "Read(**/.env.local)"]
+      deny: [
+        "Bash(git push * main)", "Bash(git push * main *)", "Bash(git push * HEAD:main*)",
+        "Bash(git push --force *)", "Bash(git push -f *)", "Read(**/.env)", "Read(**/.env.local)"
+      ]
     }
   }
   + (if $flow then {

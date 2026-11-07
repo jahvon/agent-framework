@@ -19,12 +19,12 @@ Note any conflict you resolved in the PR description.
 
 ## Flow
 
-```mermaid
-flowchart LR
-  T[Task] --> C{Trivial?}
-  C -->|yes| I[Implement]
-  C -->|no| P[Review packet] --> W[Wait for answers] --> I
-  I --> D[Draft PR] --> K[Ready checklist] --> H[Handoff]
+```text
+Task ──▶ Trivial? ──yes─────────────────────────────────▶ Implement
+            │                                                 ▲
+            └──no──▶ Review packet ──▶ Wait for answers ──────┘
+
+Implement ──▶ Draft PR ──▶ Ready checklist ──▶ Handoff
 ```
 
 1. **Classify.** Trivial means a typo, copy change, patch bump, or obvious one-file fix. Everything else is standard.

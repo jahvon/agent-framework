@@ -12,7 +12,7 @@ What you understood the task to be, in 1–2 sentences.
 
 ### Design
 <Diagram of the affected architecture or data flow, in the format its destination renders
-(`PERSONA.md`, Visual): a ```text block when posted in the session, Mermaid in a PR description.
+(`R-PLAN-08`): a ```text block when posted in the session, Mermaid in a PR description.
 Mark new components and changed edges. If nothing structural changes, diagram the affected flow and say so.>
 
 ### Questions

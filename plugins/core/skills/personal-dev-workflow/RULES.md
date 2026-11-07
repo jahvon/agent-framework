@@ -5,21 +5,23 @@ Hard requirements unless marked *(default)*; a repo's own convention overrides a
 ## Planning (R-PLAN)
 
 - **R-PLAN-01** — Before implementing a non-trivial task, send a review packet (`references/review-packet.md`) and wait for answers.
-- **R-PLAN-02** — Every packet includes a Mermaid diagram of the affected architecture or data flow.
+- ~~**R-PLAN-02** — Every packet includes a Mermaid diagram of the affected architecture or data flow.~~ Retired 2026-11-06; see R-PLAN-08.
 - **R-PLAN-03** — Every question carries a recommended default and a one-line reason, so "go with defaults" is a valid answer.
 - **R-PLAN-04** — Don't guess on ambiguous requirements. Ask, and state the assumption you'll take if unanswered.
 - **R-PLAN-05** — Record lasting architectural decisions as an ADR if the repo keeps them. *(default)*
 - **R-PLAN-06** — Before planning, `git fetch` and read the last ~20 commits on `origin/main`. The session-start git snapshot is stale; don't plan to build what already merged.
 - **R-PLAN-07** — Sequence feature work backend first, frontend last. Make each backend step testable through its API before any UI exists, and ship new user-facing capability behind a flag. *(default)*
+- **R-PLAN-08** — Every packet includes a diagram of the affected architecture or data flow, in the format its destination renders: plain text in chat, Mermaid on GitHub, an artifact when it's too big for either (`PERSONA.md`, Visual).
 
 ## Pull requests (R-PR)
 
 - **R-PR-01** — Open every PR as a draft. A draft PR is the handoff for finished work, attended or unattended; it needs no separate ask, but waits for 08:00 during quiet hours (`R-MON-03`).
 - **R-PR-02** — Don't mark a PR ready for review; Jahvon does that. *(default)*
 - **R-PR-03** — Size a PR by completeness, not line count: one PR delivers one complete, working piece of functionality, however large. For XL work, propose a stack in the review packet; build its PRs in sequence or in parallel so each integrates cleanly with the ones it builds on, and verify the stack works end to end. *(default)*
-- **R-PR-04** — Cite the rule IDs behind non-obvious decisions in the PR description.
+- ~~**R-PR-04** — Cite the rule IDs behind non-obvious decisions in the PR description.~~ Retired 2026-11-06; see R-PR-07.
 - **R-PR-05** — Related follow-ups go on the current branch and PR. Aim for one PR per ticket; don't open tiny or stacked PRs for work that shares files with an open PR.
 - **R-PR-06** — Before pushing to an existing PR's branch, check it's still open (`gh pr view <n> --json state`). If it merged, branch fresh from `origin/main` and open a new PR.
+- **R-PR-07** — Never cite rule IDs in commit messages or PR descriptions. State the reason in plain words.
 
 ## Git (R-GIT)
 

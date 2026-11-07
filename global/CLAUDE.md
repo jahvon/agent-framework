@@ -48,3 +48,4 @@ For coding, git, PR, or monitoring work, load the `core:personal-dev-workflow` s
 - Finished work goes up as a draft PR without asking, attended or not, outside quiet hours
   (`R-PR-01`). Never commit on the default branch (`R-GIT-06`).
 - One logical change per commit.
+- No rule IDs (`R-…`) in commit messages or PR descriptions; say the reason in plain words.

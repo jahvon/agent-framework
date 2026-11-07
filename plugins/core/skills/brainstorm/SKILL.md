@@ -37,7 +37,8 @@ Pin down with the first question round:
 
 ### 2. Explore the solution space
 
-Present 2–3 viable approaches side by side: a Mermaid diagram each, then one comparison table
+Present 2–3 viable approaches side by side: a diagram each (plain text in chat, Mermaid in a PR or doc;
+`PERSONA.md`, Visual), then one comparison table
 (layers/packages touched, complexity, blast radius, reversibility, cost, key risk). Then
 recommend one. Flag when the choice warrants a decision record (`docs-and-decisions` skill).
 

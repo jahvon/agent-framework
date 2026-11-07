@@ -19,6 +19,8 @@
     "allow": [
       "WebSearch",
       "WebFetch(domain:github.com)",
+      "Bash(git *)",
+      "Bash(gh *)",
       "WebFetch(domain:flowexec.io)",
       "Read(//tmp/**)",
       "Bash(go mod:*)",
@@ -26,7 +28,6 @@
       "Bash(cargo fmt:*)",
       "Bash(cargo clippy:*)",
       "Bash(npx eslint:*)",
-      "Bash(gh search:*)",
       "Bash(flow template:*)",
       "Bash(flow workspace:*)",
       "Bash(flow browse:*)",
@@ -42,18 +43,19 @@
       "mcp__flow__execute"
     ],
     "ask": [
-      "Bash(git push:*)",
-      "Bash(git reset --hard:*)",
-      "Bash(git clean:*)",
-      "Bash(gh pr create:*)",
-      "Bash(gh pr merge:*)",
-      "Bash(gh issue create:*)",
-      "Bash(gh release:*)"
+      "Bash(git reset --hard *)",
+      "Bash(git clean *)",
+      "Bash(gh pr merge *)",
+      "Bash(gh pr ready *)",
+      "Bash(gh release *)",
+      "Bash(gh repo delete *)"
     ],
     "deny": [
-      "Bash(git push --force:*)",
-      "Bash(git push -f:*)",
-      "Bash(git push --force-with-lease:*)",
+      "Bash(git push * main)",
+      "Bash(git push * main *)",
+      "Bash(git push * HEAD:main*)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
       "Bash(env)",
       "Bash(printenv:*)",
       "Bash(flow secret get:*)",

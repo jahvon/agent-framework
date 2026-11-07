@@ -4,21 +4,33 @@
 
 - Open as a draft (`gh pr create --draft`, or the host's equivalent).
 - Title in conventional-commit style with the ticket ID, e.g. `feat(api): retry on upstream timeout (ABC-123)`.
+- Never cite rule IDs (`R-…`) in commits or PR descriptions. State the reason in plain words.
+- The description squash-merges as the commit body on main, so it holds only what belongs in
+  history: no status line, try-it commands, verification, checklists, HTML comments, or trailers.
 - Use the repo's PR template if it has one; otherwise this:
+
+~~~markdown
+## Summary
+Why this change exists and what it does, in 2–4 sentences. The diff shows the mechanics.
+
+## Changes
+Only what the Summary doesn't make obvious. Omit if empty.
+
+## Design
+Mermaid diagram if architecture or data flow changed. Omit otherwise.
+~~~
+
+Everything for the reviewer goes in **one status comment**, edited in place as things change:
 
 ~~~markdown
 > **Status:** <Done | Needs you: … | Blocked: …>
 
-## Summary
-What changed and why, in 2–4 sentences. Link the answered review packet.
+Review packet: <link, if any>
 
 ## Try it
 ```bash
 <commands to check out the branch and run or test the change>
 ```
-
-## Design
-Mermaid diagram if architecture or data flow changed; otherwise "No structural change".
 
 ## Verification
 - Verified: <what you ran and the result>
@@ -26,9 +38,6 @@ Mermaid diagram if architecture or data flow changed; otherwise "No structural c
 
 ## Risks
 - ...
-
-## Rules applied
-R-ARCH-01 (kept X out of Y's service), R-PR-03 (stacked as two PRs), ...
 ~~~
 
 ## Ready checklist
@@ -38,7 +47,7 @@ All true before you hand the PR to Jahvon:
 - [ ] Implementation matches the answered packet
 - [ ] CI green: build, tests, lint, type checks
 - [ ] No debug code, stray files, or unrelated churn in the diff
-- [ ] Description complete: status line, try-it commands, verified and not-verified
+- [ ] Description is history-clean; status comment has the status line, try-it commands, verified and not-verified
 - [ ] Delivers complete, working functionality (`R-PR-03`); if stacked, the stack was agreed and integrates end to end
 
 ## Review feedback

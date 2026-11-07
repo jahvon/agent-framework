@@ -51,7 +51,8 @@ PR changes.
 ## Step 3 — Write the description
 
 Fill the repo's `.github/pull_request_template.md` if it has one; otherwise use the template in
-`pr-workflow.md` (status line, Summary, Try it, Design, Verification, Risks, Rules applied).
+`pr-workflow.md` (status line, Summary, Try it, Design, Verification, Risks). Never cite rule IDs (`R-…`) in
+the title, description, or commit messages; state the reason in plain words.
 
 - **Title** becomes the squashed commit subject: Conventional Commits, imperative, no trailing
   period, ticket ID in parentheses when there is one — `fix(parser): reject empty refs (ENG-12)`.

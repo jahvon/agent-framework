@@ -4,6 +4,7 @@
 
 - Open as a draft (`gh pr create --draft`, or the host's equivalent).
 - Title in conventional-commit style with the ticket ID, e.g. `feat(api): retry on upstream timeout (ABC-123)`.
+- Never cite rule IDs (`R-…`) in commits or PR descriptions. State the reason in plain words.
 - Use the repo's PR template if it has one; otherwise this:
 
 ~~~markdown
@@ -26,9 +27,6 @@ Mermaid diagram if architecture or data flow changed; otherwise "No structural c
 
 ## Risks
 - ...
-
-## Rules applied
-R-ARCH-01 (kept X out of Y's service), R-PR-03 (stacked as two PRs), ...
 ~~~
 
 ## Ready checklist

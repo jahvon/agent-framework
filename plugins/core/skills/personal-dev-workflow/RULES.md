@@ -57,3 +57,4 @@ Hard requirements unless marked *(default)*; a repo's own convention overrides a
 - **R-CODE-01** — Check current docs and stable versions; don't write APIs from memory.
 - **R-CODE-02** — Minimal comments: only the "why" the code can't show, in 1–2 lines. Config files get one line or none. Never describe earlier designs ("replaced X", "previously…"); the commit message holds rationale.
 - **R-CODE-03** — Use the repo's existing tooling. Ask before adding a tool or dependency.
+- **R-CODE-04** — Local containers run on Colima through the docker CLI. Executables call `${CONTAINER_RUNTIME:-docker}` instead of naming docker or podman, and don't rely on Docker Desktop. Move an executable over when you next touch it. *(default)*

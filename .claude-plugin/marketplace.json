@@ -5,7 +5,7 @@
     "email": "email@jahvon.dev"
   },
   "metadata": {
-    "description": "Jahvon's personal coding-agent skills: PR workflow, review, planning, docs and decisions, and flow automation."
+    "description": "Jahvon's personal coding-agent skills: PR workflow, review, planning, docs and decisions, flow automation, and diagrams."
   },
   "plugins": [
     {
@@ -17,6 +17,11 @@
       "name": "core",
       "description": "General workflow skills: opening and reviewing PRs, planning, tickets, validation, docs and decisions, and project setup.",
       "source": "./plugins/core"
+    },
+    {
+      "name": "diagrams",
+      "description": "Hand-drawn Excalidraw diagrams for blogs and docs, rendered to self-contained SVG with a visual review loop.",
+      "source": "./plugins/diagrams"
     }
   ]
 }

@@ -10,6 +10,8 @@ Single user: optimize for Jahvon's workflow, not for teammates.
     `personal-dev-workflow` holds the persona, the numbered `RULES.md`, and the review-packet / PR /
     quiet-hours references; other skills defer to it.
   - `flow` — skills for repos that use flow for task automation.
+  - `diagrams` — `excalidraw-diagram`: Excalidraw diagrams rendered to SVG/PNG by a dependency-free
+    Node script that drives headless Chrome (pinned Excalidraw from esm.sh).
 - `global/` — machine-level config: `CLAUDE.md` and `settings.base.json`. `install agent:global` symlinks
   `CLAUDE.md`, plus `PERSONA.md` and `RULES.md` from `personal-dev-workflow`, into `~/.claude/`.
 - `templates/project/` — files installed into a project by `install agent:project`.

@@ -15,7 +15,7 @@ flow install agent:global
 `install agent:global` symlinks `global/CLAUDE.md`, `PERSONA.md`, and `RULES.md` into `~/.claude/`
 (CLAUDE.md `@`-imports the other two — check with `/memory`), builds
 `~/.claude/settings.json` from `global/settings.base.json` plus the untracked, per-machine
-`~/.claude/settings.overlay.json`, and installs the `core` and `flow` plugins from this repo's
+`~/.claude/settings.overlay.json`, and installs the `core`, `flow`, and `diagrams` plugins from this repo's
 marketplace. `flow update agent:global` pulls and reapplies; `flow check agent:global` shows drift.
 
 ## Setup in a project

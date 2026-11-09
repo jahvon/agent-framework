@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://flowexec.io/schemas/flowfile_schema.json
+namespace: excalidraw
+visibility: public
+tags: [diagrams, excalidraw]
+description: |
+  Render Excalidraw diagrams for the diagrams plugin's excalidraw-diagram skill. Run from any repo:
+  `flow render agent-framework/excalidraw:diagram <file-or-dir>`
+executables:
+  - verb: render
+    name: diagram
+    description: |
+      Render a *.skeleton.json or *.excalidraw file, or every one in a directory, to SVG and PNG
+      next to the input, and report layout problems. Needs Node 22+, Chrome, and access to esm.sh.
+    exec:
+      dir: ./
+      args:
+        - pos: 1
+          envKey: TARGET
+          required: true
+        - flag: scale
+          envKey: SCALE
+          default: "2"
+        - flag: png
+          envKey: PNG
+          type: bool
+          default: "true"
+        - flag: strict
+          envKey: STRICT
+          type: bool
+          default: "false"
+      cmd: >-
+        node "$FLOW_DEFINITION_DIR/../scripts/excalidraw/render.mjs" "$TARGET"
+        --scale="$SCALE" --png="$PNG" --strict="$STRICT"
+
+  - verb: test
+    name: renderer
+    description: Unit-test the renderer, then render the skill's examples end to end with strict layout checks
+    exec:
+      cmd: '"$FLOW_DEFINITION_DIR/../scripts/excalidraw/smoke.sh"'

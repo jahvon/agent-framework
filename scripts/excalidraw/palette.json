@@ -1,0 +1,21 @@
+{
+  "canvas": "#1A1E20",
+  "colors": {
+    "fg": "#d3c6aa",
+    "note": "#859289",
+    "line": "#9da9a0",
+    "faint": "#475258"
+  },
+  "roles": {
+    "neutral": { "stroke": "#9da9a0", "fill": "#2d353b" },
+    "entry": { "stroke": "#e69875", "fill": "#2d353b" },
+    "source": { "stroke": "#a7c080", "fill": "#425047" },
+    "machine": { "stroke": "#7fbbb3", "fill": "#3a515d" },
+    "network": { "stroke": "#83c092", "fill": "#2d353b" },
+    "agent": { "stroke": "#d699b6", "fill": "#2d353b" },
+    "decision": { "stroke": "#dbbc7f", "fill": "#4d4c43" },
+    "failure": { "stroke": "#e67e80", "fill": "#514045" },
+    "done": { "stroke": "#a7c080", "fill": "#2d353b" }
+  },
+  "code": { "fill": "#232a2e", "stroke": "#475258", "text": "#a7c080" }
+}

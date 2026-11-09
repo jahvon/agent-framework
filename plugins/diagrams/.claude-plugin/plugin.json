@@ -1,0 +1,9 @@
+{
+  "name": "diagrams",
+  "description": "Hand-drawn Excalidraw diagrams for blogs and docs, rendered to self-contained SVG with a visual review loop.",
+  "author": {
+    "name": "Jahvon Dockery",
+    "email": "email@jahvon.dev"
+  },
+  "repository": "https://github.com/jahvon/agent-framework"
+}

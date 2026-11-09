@@ -13,7 +13,7 @@ OVERLAY="$CLAUDE_DIR/settings.overlay.json"
 BUILT="$STATE_DIR/settings.built.json"
 MARKETPLACE="jahvon"
 MARKETPLACE_SOURCE="${MARKETPLACE_SOURCE:-$REPO}"
-PLUGINS=(core flow)
+PLUGINS=(core flow diagrams)
 # Linked into $CLAUDE_DIR; global/CLAUDE.md @-imports the last two.
 PERSONAL_SKILL="plugins/core/skills/personal-dev-workflow"
 LINKS=("CLAUDE.md:global/CLAUDE.md" "PERSONA.md:$PERSONAL_SKILL/PERSONA.md" "RULES.md:$PERSONAL_SKILL/RULES.md")

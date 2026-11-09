@@ -10,6 +10,10 @@ Single user: optimize for Jahvon's workflow, not for teammates.
     `personal-dev-workflow` holds the persona, the numbered `RULES.md`, and the review-packet / PR /
     quiet-hours references; other skills defer to it.
   - `flow` — skills for repos that use flow for task automation.
+  - `diagrams` — `excalidraw-diagram`: Excalidraw diagrams for blogs and docs. The skill holds the
+    method and examples. Rendering lives in `scripts/excalidraw/` behind
+    `render excalidraw:diagram`, a dependency-free Node script that drives headless Chrome
+    (pinned Excalidraw from esm.sh). Colors come only from `scripts/excalidraw/palette.json`.
 - `global/` — machine-level config: `CLAUDE.md` and `settings.base.json`. `install agent:global` symlinks
   `CLAUDE.md`, plus `PERSONA.md` and `RULES.md` from `personal-dev-workflow`, into `~/.claude/`.
 - `templates/project/` — files installed into a project by `install agent:project`.
@@ -32,7 +36,9 @@ Single user: optimize for Jahvon's workflow, not for teammates.
 
 ## Tasks
 
-- `flow validate` — flowfiles, JSON, skill frontmatter, `claude plugin validate`. Must pass before commit.
+- `flow validate` — flowfiles, JSON, unit tests, skill frontmatter, `claude plugin validate`. Must pass before commit.
 - `flow setup` — register this repo as the `agent-framework` workspace.
 - `flow install agent:global` / `flow update agent:global` / `flow check agent:global`
 - `flow install agent-framework/agent:project` / `flow check agent-framework/agent:project` — run from the target repo.
+- `flow render agent-framework/excalidraw:diagram -- <file-or-dir>` — render diagrams from any directory.
+- `flow test excalidraw:renderer` — unit tests plus a real render of the skill's examples (needs Chrome and esm.sh). Run after changing `scripts/excalidraw/`.

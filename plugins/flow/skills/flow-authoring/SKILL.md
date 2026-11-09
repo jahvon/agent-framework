@@ -45,8 +45,12 @@ a command for someone else, propose an executable for it.
 
 ## Writing and checking
 
-1. Prefer `mcp__flow__write_flowfile`, which validates against the schema as it writes.
-   Otherwise edit the file, then run `flow schema validate --strict <file>`.
-2. Run `mcp__flow__sync_executables` (or `flow sync`) so the new executable is discoverable.
-3. Run it once through `mcp__flow__execute` and check the output before calling it done.
+Use mochi first and flow as the fallback, per `flow-context` (`<mcp>` is `mcp__mochi__` or
+`mcp__flow__`, `<cli>` is `mochi` or `flow`). Flowfiles and docs you write still say `flow`,
+since that's what teammates and CI run.
+
+1. Prefer `<mcp>write_flowfile`, which validates against the schema as it writes.
+   Otherwise edit the file, then run `<cli> schema validate --strict <file>`.
+2. Run `<mcp>sync_executables` (or `<cli> sync`) so the new executable is discoverable.
+3. Run it once through `<mcp>execute` and check the output before calling it done.
 4. If the repo's AGENTS.md or README lists tasks, update the list in the same change.

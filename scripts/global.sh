@@ -14,6 +14,11 @@ BUILT="$STATE_DIR/settings.built.json"
 MARKETPLACE="jahvon"
 MARKETPLACE_SOURCE="${MARKETPLACE_SOURCE:-$REPO}"
 PLUGINS=(core flow diagrams)
+# mochi is personal (paid), so it's wired in per machine here, never in project files.
+MOCHI_BIN="$(command -v mochi || true)"
+[ -z "$MOCHI_BIN" ] && [ -x "$HOME/.mochi/bin/mochi" ] && MOCHI_BIN="$HOME/.mochi/bin/mochi"
+CLAUDE_JSON="${CLAUDE_CONFIG_DIR:+$CLAUDE_CONFIG_DIR/.claude.json}"
+CLAUDE_JSON="${CLAUDE_JSON:-$HOME/.claude.json}"
 # Linked into $CLAUDE_DIR; global/CLAUDE.md @-imports the last two.
 PERSONAL_SKILL="plugins/core/skills/personal-dev-workflow"
 LINKS=("CLAUDE.md:global/CLAUDE.md" "PERSONA.md:$PERSONAL_SKILL/PERSONA.md" "RULES.md:$PERSONAL_SKILL/RULES.md")
@@ -38,7 +43,40 @@ build_settings() {
     -f "$REPO/scripts/lib/merge.jq" \
     | jq --arg m "$MARKETPLACE" --argjson src "$(marketplace_source_json)" --args \
       '.extraKnownMarketplaces[$m] = {source: $src}
-       | reduce $ARGS.positional[] as $p (.; .enabledPlugins["\($p)@\($m)"] = true)' "${PLUGINS[@]}"
+       | reduce $ARGS.positional[] as $p (.; .enabledPlugins["\($p)@\($m)"] = true)' "${PLUGINS[@]}" \
+    | if [ -n "$MOCHI_BIN" ]; then
+        # The user-scope mochi server already has every flow tool; hide repos' flow server.
+        jq '.disabledMcpjsonServers = ((.disabledMcpjsonServers // []) + ["flow"] | unique)'
+      else cat; fi
+}
+
+mochi_server_json() {
+  jq -nc --arg cmd "$MOCHI_BIN" '{type: "stdio", command: $cmd, args: ["mcp"], timeout: 600000}'
+}
+
+registered_mochi_server() {
+  [ -f "$CLAUDE_JSON" ] && jq -c '.mcpServers.mochi // empty' "$CLAUDE_JSON" || true
+}
+
+ensure_mochi_mcp() {
+  local current
+  current="$(registered_mochi_server)"
+  if [ -z "$MOCHI_BIN" ]; then
+    if [ -n "$current" ]; then
+      claude mcp remove mochi -s user >/dev/null
+      echo "  mochi not installed; removed the user mochi MCP server"
+    else
+      echo "  mochi not installed; agents use flow"
+    fi
+    return
+  fi
+  if [ "$current" = "$(mochi_server_json)" ]; then
+    echo "  mochi MCP server already registered ($MOCHI_BIN)"
+    return
+  fi
+  [ -n "$current" ] && claude mcp remove mochi -s user >/dev/null
+  claude mcp add-json -s user mochi "$(mochi_server_json)" >/dev/null
+  echo "  registered user MCP server mochi -> $MOCHI_BIN mcp"
 }
 
 strip_runtime() { jq --argjson k "$RUNTIME_KEYS" 'delpaths([$k[] | [.]])' "$1"; }
@@ -141,6 +179,20 @@ check() {
       echo "✗ plugin $p@$MARKETPLACE not installed or disabled at user scope"; ok=1
     fi
   done
+  if [ -z "$MOCHI_BIN" ]; then
+    echo "· mochi not installed; agents use flow"
+  else
+    if [ "$(registered_mochi_server)" = "$(mochi_server_json)" ]; then
+      echo "✓ mochi MCP server registered"
+    else
+      echo "✗ mochi MCP server missing or stale — run update agent:global"; ok=1
+    fi
+    if "$MOCHI_BIN" license status -o json 2>/dev/null | jq -e '.usable == true' >/dev/null; then
+      echo "✓ mochi license usable"
+    else
+      echo "✗ mochi license not usable — agents fall back to flow (mochi license status)"; ok=1
+    fi
+  fi
   return $ok
 }
 
@@ -150,6 +202,7 @@ case "${1:-}" in
     echo "→ links"; link_files
     echo "→ settings"; write_settings
     echo "→ plugins"; ensure_plugins
+    echo "→ mochi"; ensure_mochi_mcp
     ;;
   update)
     echo "→ pull"
@@ -158,9 +211,8 @@ case "${1:-}" in
     else
       echo "  no upstream configured; using the local checkout"
     fi
-    echo "→ links"; link_files
-    echo "→ settings"; write_settings
-    echo "→ plugins"; ensure_plugins
+    # Re-run from the pulled copy; bash has already read this file's old version.
+    exec "$REPO/scripts/global.sh" install
     ;;
   check) check ;;
   *) echo "usage: $0 install|update|check" >&2; exit 2 ;;

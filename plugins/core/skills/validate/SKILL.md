@@ -10,8 +10,8 @@ description: Run the repo's own full validation (build, tests, lint, format, gen
 Use the first that applies:
 
 1. The **Validate** line in `AGENTS.md` Project facts.
-2. A flow workspace (`flow.yaml` at the root): a `validate` executable via
-   `mcp__flow__list_executables` / `mcp__flow__execute` (see `flow-context`).
+2. A flow workspace (`flow.yaml` at the root): a `validate` executable, run through mochi
+   (`mcp__mochi__execute`) with flow as the fallback (see `flow-context`).
 3. `package.json` script `validate` (or `check`), run with the repo's package manager — the
    lockfile tells you which.
 4. A `validate`/`check` target in a `Makefile` or `justfile`.

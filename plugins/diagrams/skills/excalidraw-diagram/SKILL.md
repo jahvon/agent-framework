@@ -25,7 +25,8 @@ If the layout doesn't make that sentence obvious with the labels covered, change
    `flow render agent-framework/excalidraw:diagram -- <path> [--scale=2] [--png=false] [--strict]`
    With the flow MCP server, call `execute` with ref `render agent-framework/excalidraw:diagram`.
    It writes `<name>.excalidraw` (editable), `<name>.svg` (publish this; fonts are embedded),
-   and `<name>.png` (for review), then lists layout findings under each file.
+   and `<name>.png` (for review). Each diagram gets one line: `✓` when clean, or `⚠` followed
+   by one `⚠ <name>: <finding>` line per problem. Flow shows these as NTC, so they stand out.
 5. **Fix every finding,** then look at the PNG with the Read tool for what lint can't judge:
    balance, reading order, whether the main element stands out. Render again. It's
    usually done after 2–3 passes.

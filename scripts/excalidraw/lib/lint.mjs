@@ -8,7 +8,9 @@ export function lint(elements) {
   const live = elements.filter((e) => !e.isDeleted);
   const byId = new Map(live.map((e) => [e.id, e]));
   const texts = live.filter((e) => e.type === "text");
-  const solidShapes = live.filter((e) => SHAPES.has(e.type) && e.backgroundColor !== "transparent");
+  // Zones (dashed, unfilled) and caption holders (invisible) are backdrops, not obstacles.
+  const backdrop = (e) => e.backgroundColor === "transparent" && (e.strokeStyle === "dashed" || e.strokeColor === "transparent");
+  const solidShapes = live.filter((e) => SHAPES.has(e.type) && !backdrop(e));
   const arrows = live.filter((e) => e.type === "arrow");
   const findings = [];
   const add = (el, message) => findings.push({ id: el.id, message });
@@ -70,7 +72,8 @@ export function lint(elements) {
 
 function quote(t) {
   const s = t.originalText.replace(/\n/g, " ");
-  return `"${s.length > 32 ? `${s.slice(0, 31)}…` : s}"`;
+  // Single quotes stay unescaped in flow's logfmt logs.
+  return `'${s.length > 32 ? `${s.slice(0, 31)}…` : s}'`;
 }
 
 function rect(e) {

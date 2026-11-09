@@ -29,7 +29,7 @@ test("wrapped and too-tall labels name the label", () => {
     rect("a", 0, 0, 100, 30),
     text("la", 5, 0, 90, 40, "two\nlines", { originalText: "two lines", containerId: "a" }),
   ]);
-  assert.ok(found.some((m) => /"two lines" wraps/.test(m)));
+  assert.ok(found.some((m) => /'two lines' wraps/.test(m)));
   assert.ok(found.some((m) => /taller than its box/.test(m)));
 });
 
@@ -40,8 +40,8 @@ test("overlapping text and text across a shape edge", () => {
     rect("box", 120, 0, 100, 50),
     text("l", 130, 15, 80, 20, "inside", { containerId: "box" }),
   ]);
-  assert.ok(found.some((m) => /"first" overlaps "second"/.test(m)));
-  assert.ok(found.some((m) => /"second" crosses the edge of "inside"/.test(m)));
+  assert.ok(found.some((m) => /'first' overlaps 'second'/.test(m)));
+  assert.ok(found.some((m) => /'second' crosses the edge of 'inside'/.test(m)));
 });
 
 test("arrows that stop short, cross a shape, or run through text", () => {
@@ -54,12 +54,23 @@ test("arrows that stop short, cross a shape, or run through text", () => {
   ]);
   assert.ok(found.some((m) => /ends 30px from/.test(m)));
   assert.ok(found.some((m) => /crosses rectangle at \(150, 0\)/.test(m)));
-  assert.ok(found.some((m) => /runs through text "via"/.test(m)));
+  assert.ok(found.some((m) => /runs through text 'via'/.test(m)));
 });
 
-test("transparent zones and an arrow's own label are not obstacles", () => {
+test("an unfilled box in the path is an obstacle", () => {
+  const found = messages([
+    rect("a", 0, 0, 100, 50),
+    rect("hollow", 150, 0, 50, 50, { backgroundColor: "transparent" }),
+    rect("b", 300, 0, 100, 50),
+    arrow("ab", [[100, 25], [300, 25]], "a", "b"),
+  ]);
+  assert.ok(found.some((m) => /crosses rectangle at \(150, 0\)/.test(m)));
+});
+
+test("zones, caption holders, and an arrow's own label are not obstacles", () => {
   assert.deepEqual(messages([
-    rect("zone", -50, -50, 500, 200, { backgroundColor: "transparent" }),
+    rect("zone", -50, -50, 500, 200, { backgroundColor: "transparent", strokeStyle: "dashed" }),
+    rect("cap", 150, 0, 50, 50, { backgroundColor: "transparent", strokeColor: "transparent" }),
     rect("a", 0, 0, 100, 50),
     rect("b", 300, 0, 100, 50),
     arrow("ab", [[100, 25], [300, 25]], "a", "b"),

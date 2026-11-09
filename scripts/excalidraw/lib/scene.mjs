@@ -150,8 +150,11 @@ function routeArrow(arrow, shapes) {
     start = edge(a, s);
     end = edge(b, OPPOSITE[s]);
   } else {
-    const first = via[0] ? point(via[0]) : b;
-    const last = via.length ? point(via.at(-1)) : a;
+    // With one end free, the other end faces the free end's path point.
+    const freeStart = arrow.path?.[0] && point(arrow.path[0]);
+    const freeEnd = arrow.path?.at(-1) && point(arrow.path.at(-1));
+    const first = via[0] ? point(via[0]) : (b ?? freeEnd);
+    const last = via.length ? point(via.at(-1)) : (a ?? freeStart);
     start = a ? (first ? anchor(a, first) : null) : arrow.path?.[0];
     end = b ? (last ? anchor(b, last) : null) : arrow.path?.at(-1);
   }

@@ -21,5 +21,5 @@ with the labels hidden.
 
 ## Hero image
 
-For the top of a post: one idea, at most 6 elements, a 32–40px title as free text, and
-plenty of empty canvas. It should read at thumbnail size.
+For the top of a post: one idea, a short 32–40px title, and plenty of empty canvas. A
+before/after contrast works well. It should read at thumbnail size.

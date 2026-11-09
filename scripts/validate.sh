@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Validates everything this repo ships: flowfiles, JSON, skill frontmatter, and the plugin marketplace.
+# Validates everything this repo ships: flowfiles, JSON, unit tests, skill frontmatter, and the plugin marketplace.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 fail=0
@@ -11,6 +11,9 @@ echo "→ json"
 while IFS= read -r f; do
   jq empty "$f" 2>/dev/null || { echo "invalid json: $f"; fail=1; }
 done < <(git ls-files --cached --others --exclude-standard '*.json')
+
+echo "→ unit tests"
+node --test --test-reporter=dot scripts/*/test/*.test.mjs || fail=1
 
 echo "→ skill frontmatter"
 while IFS= read -r f; do

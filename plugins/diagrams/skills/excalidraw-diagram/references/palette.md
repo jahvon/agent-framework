@@ -1,43 +1,37 @@
 # Palette
 
-Everforest Dark on mochi's `#1A1E20` ground, matching the terminal, prompt, and jahvon.dev.
-Color carries meaning: pick a role, then use its stroke for the shape's outline and its
-arrows. Fills stay dark so text stays readable.
-
-## Canvas and text
-
-| Use | Color |
-|---|---|
-| Canvas (`appState.viewBackgroundColor`) | `#1A1E20` |
-| Title, text inside shapes | `#d3c6aa` |
-| Annotations, captions | `#859289` |
-| Arrows and structural lines (neutral) | `#9da9a0` |
-| Faint guides, dividers, zone outlines | `#475258` |
+Everforest Dark on a `#1A1E20` canvas, matching the terminal and jahvon.dev. The values
+are defined in `scripts/excalidraw/palette.json` in agent-framework. Diagrams use role
+and color names, never hex codes, so a palette change re-themes every diagram.
 
 ## Roles
 
-| Role | Stroke | Fill |
+A role colors a shape's outline and fill, or an arrow's or text's stroke. Pick by meaning:
+
+| Role | Use for | Looks |
 |---|---|---|
-| Neutral component | `#9da9a0` | `#2d353b` |
-| Entry point, trigger, the command you type | `#e69875` | `#2d353b` |
-| Source of truth (repo, registry, config) | `#a7c080` | `#425047` |
-| Machine, runtime, where it runs | `#7fbbb3` | `#3a515d` |
-| Network, external service | `#83c092` | `#2d353b` |
-| Agent, AI, automation | `#d699b6` | `#2d353b` |
-| Decision, warning, caveat | `#dbbc7f` | `#4d4c43` |
-| Failure, before (in a contrast) | `#e67e80` | `#514045` |
+| `entry` | The command you type, a trigger, a starting point | orange |
+| `source` | Source of truth: a repo, a registry, config | green, tinted fill |
+| `machine` | Where something runs: a host, a runtime, a cluster | blue, tinted fill |
+| `network` | Network paths, external services | aqua |
+| `agent` | Agents, AI, automation, CI | pink |
+| `decision` | Branches, warnings, caveats | yellow, tinted fill |
+| `failure` | Errors, rollbacks, the "before" in a contrast | red, tinted fill |
+| `done` | Success, the end state | green |
+| `neutral` | Everything else | grey |
 
-## Zones
+Use at most four roles per diagram. Color is the second thing a reader notices, after shape.
 
-Group regions with a large rectangle in stroke `#475258`, `"backgroundColor": "transparent"`,
-`"strokeStyle": "dashed"`, and a free-text title in the role color at its top-left.
+## Colors
 
-## Code and evidence
-
-A real command or file snippet: rectangle fill `#232a2e`, stroke `#475258`, text
-`#a7c080`, `"fontFamily": 3` (monospace), fontSize 14–16.
+| Name | Use for |
+|---|---|
+| `fg` | Titles and labels (the default for text) |
+| `note` | Subtitles, annotations, captions |
+| `line` | Arrows and structural lines (the default for arrows) |
+| `faint` | Zone outlines, dividers, tree branches (the default for lines) |
 
 ## Light pages
 
-These colors are built for dark pages. On a light page the SVG shows as a dark card,
-which is intentional. Don't swap in a second palette for one diagram.
+The palette is built for dark pages. On a light page the SVG shows as a dark card, which is
+intentional. Don't swap in a second palette for one diagram.

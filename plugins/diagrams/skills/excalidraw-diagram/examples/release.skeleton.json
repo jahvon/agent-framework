@@ -1,0 +1,29 @@
+{
+  "elements": [
+    { "type": "text", "x": 0, "y": 0, "text": "Shipping a release", "fontSize": 32 },
+    { "type": "text", "x": 0, "y": 48, "text": "one tag fans out to every place the binary lands", "color": "note" },
+
+    { "kind": "code", "id": "tag", "x": 0, "y": 130, "width": 260, "height": 54, "text": "$ git tag v1.4.0", "color": "entry" },
+    { "type": "rectangle", "id": "ci", "role": "agent", "x": 0, "y": 240, "width": 260, "height": 80, "label": { "text": "release workflow" } },
+    { "type": "arrow", "from": "tag", "to": "ci" },
+
+    { "kind": "zone", "x": 360, "y": 110, "width": 420, "height": 330, "title": "destinations", "color": "machine" },
+    { "type": "rectangle", "id": "gh", "role": "machine", "x": 400, "y": 170, "width": 340, "height": 64, "label": { "text": "GitHub release" } },
+    { "type": "rectangle", "id": "brew", "role": "machine", "x": 400, "y": 260, "width": 340, "height": 64, "label": { "text": "Homebrew tap" } },
+    { "type": "rectangle", "id": "docs", "role": "neutral", "x": 400, "y": 350, "width": 340, "height": 64, "label": { "text": "docs site" } },
+    { "type": "arrow", "from": "ci", "to": "gh", "color": "agent" },
+    { "type": "arrow", "from": "ci", "to": "brew", "color": "agent" },
+    { "type": "arrow", "from": "ci", "to": "docs", "color": "agent", "dashed": true },
+
+    { "type": "line", "path": [[0, 520], [760, 520]], "color": "line" },
+    { "kind": "dot", "cx": 60, "cy": 520, "role": "source" },
+    { "kind": "caption", "cx": 60, "y": 536, "text": "tag" },
+    { "kind": "dot", "cx": 380, "cy": 520, "role": "agent" },
+    { "kind": "caption", "cx": 380, "y": 536, "text": "build + sign" },
+    { "kind": "dot", "cx": 700, "cy": 520, "role": "done" },
+    { "kind": "caption", "cx": 700, "y": 536, "text": "published" },
+
+    { "type": "rectangle", "id": "rollback", "role": "failure", "x": 0, "y": 620, "width": 260, "height": 64, "label": { "text": "rollback" } },
+    { "type": "arrow", "from": "docs", "to": "rollback", "via": [[570, 600], [130, 600]], "color": "failure", "dashed": true }
+  ]
+}

@@ -70,12 +70,16 @@ delivering it.
 
 ## Layout
 
+- Keep text to labels and facts: names, commands, paths, counts. No subtitles, captions that
+  explain, or sentences. If the shapes don't make the point, change the shapes. If a
+  diagram needs more words to be understood, split it into two diagrams.
 - Lay out on a grid: pick a column width and row height and snap every `x`/`y` to it.
 - Size shows importance. The one thing the diagram is about is the largest or most isolated.
 - One reading direction per diagram: left to right for time and order, top to bottom
   for hierarchy.
 - Aim for fewer than ~15 boxes. If you need more, split it into two diagrams.
 - Font sizes: 32–40 title, 20–24 primary labels, 14–16 annotations. Nothing under 14.
-- Put arrow captions in free text just above the line, not in an arrow `label`, which sits on it.
+- An arrow caption is one or two words (`NFS`, `Tailscale`), in free text just above the line,
+  not in an arrow `label`, which sits on it.
 - Aim for a width of at most 2.5× the height. Blog columns shrink wide diagrams until
   the text can't be read.

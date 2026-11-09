@@ -19,7 +19,8 @@ export function lint(elements) {
     if (labels.has(el.id)) return quote(labels.get(el.id));
     if (el.type === "text") return quote(el);
     if (el.type === "arrow") {
-      const ends = [el.startBinding, el.endBinding].map((b) => (b && byId.get(b.elementId) ? name(byId.get(b.elementId)) : "?"));
+      const free = [el.points[0], el.points.at(-1)].map(([x, y]) => `(${Math.round(el.x + x)}, ${Math.round(el.y + y)})`);
+      const ends = [el.startBinding, el.endBinding].map((b, i) => (b && byId.get(b.elementId) ? name(byId.get(b.elementId)) : free[i]));
       return `arrow ${ends[0]} → ${ends[1]}`;
     }
     return `${el.type} at (${Math.round(el.x)}, ${Math.round(el.y)})`;

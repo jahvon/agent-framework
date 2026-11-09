@@ -84,6 +84,16 @@ test("a diagonal direct arrow enters on the side facing its source", () => {
   assert.deepEqual([a.x + a.points[1][0], a.y + a.points[1][1]], [400, 382]);
 });
 
+test("an arrow from a free point to a shape enters on the facing edge", () => {
+  const [, a] = expand([
+    box("nas", 0, 200, 200, 60),
+    { type: "arrow", path: [[100, 100], [100, 200]], to: "nas" },
+  ]);
+  const abs = a.points.map(([x, y]) => [a.x + x, a.y + y]);
+  assert.deepEqual(abs, [[100, 100], [100, 200]]);
+  assert.equal(a.end.id, "nas");
+});
+
 test("anchor prefers the side a shape lies beside", () => {
   const s = { x: 0, y: 0, width: 260, height: 80 };
   assert.deepEqual(anchor(s, { x: 400, y: 110, width: 340, height: 64 }), [260, 40]);

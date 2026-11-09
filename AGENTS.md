@@ -9,7 +9,8 @@ Single user: optimize for Jahvon's workflow, not for teammates.
   - `core` — workflow skills (PRs, review, planning, tickets, validation, docs and decisions, project setup).
     `personal-dev-workflow` holds the persona, the numbered `RULES.md`, and the review-packet / PR /
     quiet-hours references; other skills defer to it.
-  - `flow` — skills for repos that use flow for task automation.
+  - `flow` — skills for repos that use flow for task automation. Agents drive them through mochi
+    when the machine has it and fall back to flow (decision 0003); files written for others say `flow`.
   - `diagrams` — `excalidraw-diagram`: Excalidraw diagrams for blogs and docs. The skill holds the
     method and examples. Rendering lives in `scripts/excalidraw/` behind
     `render excalidraw:diagram`, a dependency-free Node script that drives headless Chrome

@@ -13,8 +13,8 @@ The user reviews the result with `git diff` and tweaks it.
 
 1. **Preconditions.** Run from the repo root. `git status --porcelain` should be clean so the
    install's diff is reviewable on its own — if it isn't, tell the user and ask whether to go
-   ahead. Confirm `flow workspace list` includes `agent-framework`; if not, stop and point the
-   user at the agent-framework README setup.
+   ahead. Confirm `mochi workspace list` (or `flow workspace list`) includes
+   `agent-framework`; if not, stop and point the user at the agent-framework README setup.
 2. **Read the repo before choosing args.** Look at the existing `AGENTS.md`/`CLAUDE.md`,
    `flow.yaml`, `package.json`/`Makefile`, `.github/`, and `docs/` to pick:
    - `--tracker=linear|github|none` and `--prefix=<ID prefix>` (from branch names, commit
@@ -24,8 +24,9 @@ The user reviews the result with `git diff` and tweaks it.
    - `--flow=true` to make a non-flow repo a flow workspace — only if the user wants that
    - `--prettier=true` for repos that format with Prettier
    - `--plugins=false` if the user doesn't want the plugins enabled for the whole team
-3. **Preview.** `flow check agent-framework/agent:project -- <args>` lists what would change.
-4. **Install.** `flow install agent-framework/agent:project -- <args>`.
+3. **Preview.** `mochi check agent-framework/agent:project -- <args>` lists what would change.
+4. **Install.** `mochi install agent-framework/agent:project -- <args>`. Use `flow` for either
+   step when mochi isn't available.
 5. **Review the diff yourself** before reporting. Look for managed-section wording that
    contradicts rules the repo already states elsewhere in its `AGENTS.md`/`CLAUDE.md`, and for
    Project facts values that detection got wrong (validate command, decision-record path).

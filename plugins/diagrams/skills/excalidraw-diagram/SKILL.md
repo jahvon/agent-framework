@@ -21,9 +21,10 @@ If the layout doesn't make that sentence obvious with the labels covered, change
    another place. The outputs land next to it, so the source and every render stay
    together. Copy the SVG into a repo only when asked. `examples/release.skeleton.json`
    uses every feature.
-4. **Render** through flow, passing an absolute path to a file or a directory:
-   `flow render agent-framework/excalidraw:diagram -- <path> [--scale=2] [--png=false] [--strict]`
-   With the flow MCP server, call `execute` with ref `render agent-framework/excalidraw:diagram`.
+4. **Render** through mochi (or flow as the fallback, per `flow-context`), passing an absolute
+   path to a file or a directory:
+   `mochi render agent-framework/excalidraw:diagram -- <path> [--scale=2] [--png=false] [--strict]`
+   Over MCP, call `execute` with ref `render agent-framework/excalidraw:diagram`.
    It writes `<name>.excalidraw` (editable), `<name>.svg` (publish this; fonts are embedded),
    and `<name>.png` (for review). Each diagram gets one line: `✓` when clean, or `⚠` followed
    by one `⚠ <name>: <finding>` line per problem. Flow shows these as NTC, so they stand out.

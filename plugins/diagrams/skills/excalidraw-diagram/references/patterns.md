@@ -14,7 +14,7 @@ with the labels hidden.
 
 ## Making it concrete
 
-- Use real names: `flow update system`, `tools/servers/inventory.yaml`, `devbox`.
+- Use real names: the actual command, file path, or host, not a placeholder.
 - Add one `code` block when a short snippet shows the point better
   than a label does, such as three lines of a flowfile or the exact command.
 - Counts make claims checkable: "98 executables", "2 servers".

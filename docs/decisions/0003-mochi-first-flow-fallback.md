@@ -8,9 +8,9 @@ date: 2026-11-08
 ## Context
 
 mochi is a paid superset of flow: the same CLI command tree and all of flow's MCP tools, plus
-search, run history, stats, and discovery. Jahvon wants agents to use it, but repos here are
-shared with teammates and CI (some are public, like flowexec/flow), and not every machine has
-mochi. workbox stays on flow.
+search, run history, stats, and discovery. Agents should use it where it's installed, but
+repos here are shared with teammates and CI, some of them public, and not every machine has
+mochi.
 
 ## Options
 

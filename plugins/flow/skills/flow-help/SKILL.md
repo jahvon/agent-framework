@@ -1,7 +1,7 @@
 ---
 name: flow-help
 description: Discover which flow executables a workspace defines and what they actually run. Use to find the right dev task before running or hand-rolling a shell command, or when asked "what tasks does this repo have".
-allowed-tools: mcp__flow__list_executables, mcp__flow__get_executable, mcp__flow__get_info, mcp__flow__sync_executables, Bash(flow browse:*), Bash(flow sync:*), Read
+allowed-tools: mcp__mochi__list_executables, mcp__mochi__get_executable, mcp__mochi__get_info, mcp__mochi__sync_executables, mcp__mochi__mochi_search, mcp__flow__list_executables, mcp__flow__get_executable, mcp__flow__get_info, mcp__flow__sync_executables, Bash(mochi browse:*), Bash(mochi sync:*), Bash(flow browse:*), Bash(flow sync:*), Read
 ---
 
 # Finding flow executables
